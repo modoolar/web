@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright 2018 Modoolar <info@modoolar.com>
+ * Copyright 2019 Modoolar <info@modoolar.com>
  * License LGPLv3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html).
  *
  */

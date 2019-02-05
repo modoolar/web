@@ -17,11 +17,8 @@ definition can be either configured as copyable:
 
 1. With attribute
 
-    copyable="1"
+    isPreviewable="1"
 
-2. As widget (this is only valid way for tree view)
-
-    widget="copyable"
 
 Credits
 =======
