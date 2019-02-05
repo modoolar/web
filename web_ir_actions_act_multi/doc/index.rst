@@ -18,7 +18,7 @@ To use this functionality you need to return following action filled with list o
 .. code-block:: python
 
       @api.multi
-      def foo()
+      def foo(self):
          self.ensure_one()
          return {
             'type': 'ir.actions.act_multi',
