@@ -1,10 +1,10 @@
-# Copyright 2017 - 2018 Modoolar <info@modoolar.com>
+# Copyright 2019 Modoolar <info@modoolar.com>
 # License LGPLv3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html).
 {
     "name": "Web Image URL",
     "summary": "This module provides web widget for displaying image from URL",
     "category": "Web",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "license": "LGPL-3",
     "author": "Modoolar",
     "website": "https://www.modoolar.com/",
