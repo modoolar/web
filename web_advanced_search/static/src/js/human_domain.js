@@ -29,7 +29,7 @@
         },
 
         DomainSelector: function () {
-            var result = human_domain_methods.DomainTree.apply(this, arguments);
+            var result = human_domain_methods.DomainTree.apply(this);
             // Remove surrounding parenthesis
             return result.slice(1, -1);
         },
@@ -40,7 +40,12 @@
                 value = _.str.sprintf('"%s"', this.value);
             // Humanize chain
             this.chain.split(".").forEach(function (element, index) {
-                chain.push(element);
+                chain.push(
+                    _.findWhere(
+                        this.fieldSelector.pages[index],
+                        {name: element}
+                    ).string || element
+                );
             }, this);
             // Special beautiness for some values
             if (this.operator === "=" && _.isBoolean(this.value)) {
@@ -65,11 +70,16 @@
             domain,
             options
         );
-        var result = human_domain_methods.DomainSelector.apply(
-            domain_selector
-        );
-        domain_selector.destroy();
-        return result;
+        var dummy_parent = $("<div>");
+        return domain_selector.appendTo(dummy_parent).then(()=>{
+            var result = human_domain_methods.DomainSelector.apply(
+                domain_selector
+            );
+            domain_selector.destroy();
+            dummy_parent.remove();
+            return result;
+        })
+        
     }
 
     return {

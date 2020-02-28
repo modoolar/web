@@ -127,7 +127,22 @@ odoo.define("web_advanced_search", function (require) {
                 event.data.domain
             );
             this.propositions = [proposition];
-            this._commitSearch();
+            
+            var filters = _.invoke(this.propositions, 'get_filter').map(function (preFilter) {
+                return preFilter.attrs.string.then(string=>{
+                    return {
+                        type: 'filter',
+                        description: string,
+                        domain: Domain.prototype.arrayToString(preFilter.attrs.domain),
+                    };
+                })
+            });
+            Promise.all(filters).then(filters=>{
+              this.trigger_up('new_filters', {filters: filters});
+                _.invoke(this.propositions, 'destroy');
+                this.propositions = [];
+                this._toggleCustomFilterMenu();  
+            })
         },
     });
 
