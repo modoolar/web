@@ -12,7 +12,7 @@ odoo.define("web_advanced_search", function (require) {
     var FieldManagerMixin = require("web.FieldManagerMixin");
     var FiltersMenu = require("web.FilterMenu");
     var human_domain = require("web_advanced_search.human_domain");
-    var SearchView = require("web.ControlPanelView");
+    var SearchView = require("web.ControlPanelController");
     var Widget = require("web.Widget");
     var search_filters_registry = require('web.search_filters_registry');
     var Char = search_filters_registry.get("char");
@@ -31,7 +31,7 @@ odoo.define("web_advanced_search", function (require) {
          * @param {OdooEvent} event The target will get the dataset.
          */
         _on_get_dataset: function (event) {
-            event.target.dataset = this.dataset;
+            event.target.a_model = this.model;
             event.stopPropagation();
         },
     });
@@ -100,7 +100,7 @@ odoo.define("web_advanced_search", function (require) {
         advanced_search_open: function () {
             var domain_selector_dialog = new DomainSelectorDialog(
                 this,
-                this.dataset.model,
+                this.a_model.modelName,
                 "[]",
                 {
                     debugMode: core.debug,
@@ -123,7 +123,7 @@ odoo.define("web_advanced_search", function (require) {
             _.invoke(this.propositions, "destroy");
             var proposition = new AdvancedSearchProposition(
                 this,
-                this.dataset.model,
+                this.a_model.modelName,
                 event.data.domain
             );
             this.propositions = [proposition];

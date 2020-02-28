@@ -40,12 +40,7 @@
                 value = _.str.sprintf('"%s"', this.value);
             // Humanize chain
             this.chain.split(".").forEach(function (element, index) {
-                chain.push(
-                    _.findWhere(
-                        this.fieldSelector.pages[index],
-                        {name: element}
-                    ).string || element
-                );
+                chain.push(element);
             }, this);
             // Special beautiness for some values
             if (this.operator === "=" && _.isBoolean(this.value)) {
@@ -70,13 +65,10 @@
             domain,
             options
         );
-        var dummy_parent = $("<div>");
-        domain_selector.appendTo(dummy_parent);
         var result = human_domain_methods.DomainSelector.apply(
             domain_selector
         );
         domain_selector.destroy();
-        dummy_parent.destroy();
         return result;
     }
 
